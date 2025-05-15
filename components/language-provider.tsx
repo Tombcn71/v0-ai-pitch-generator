@@ -1,493 +1,152 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, type ReactNode } from "react"
 
-type Language = "en" | "es"
-type Translations = Record<string, Record<Language, string>>
-
-const translations: Translations = {
+// Simplified translations object with only Spanish
+const translations = {
   // Navigation
-  "nav.home": {
-    en: "Home",
-    es: "Inicio",
-  },
-  "nav.dashboard": {
-    en: "Dashboard",
-    es: "Panel",
-  },
-  "nav.contact": {
-    en: "Contact Coach",
-    es: "Contactar Coach",
-  },
-  "nav.logout": {
-    en: "Logout",
-    es: "Cerrar Sesión",
-  },
-  "nav.loggingOut": {
-    en: "Logging out...",
-    es: "Cerrando sesión...",
-  },
-  "nav.menu": {
-    en: "Menu",
-    es: "Menú",
-  },
+  "nav.home": "Inicio",
+  "nav.dashboard": "Panel",
+  "nav.contact": "Contactar Coach",
+  "nav.logout": "Cerrar Sesión",
+  "nav.loggingOut": "Cerrando sesión...",
+  "nav.menu": "Menú",
   // Pitch Canvas
-  "pitch.title": {
-    en: "Pitch Canvas Generator",
-    es: "Generador de Pitch Canvas",
-  },
-  "pitch.subtitle": {
-    en: "Create your perfect pitch with AI",
-    es: "Crea tu pitch perfecto con IA",
-  },
-  "pitch.problem": {
-    en: "Problem",
-    es: "Problema",
-  },
-  "pitch.problem.placeholder": {
-    en: "What problem are you solving?",
-    es: "¿Qué problema estás resolviendo?",
-  },
-  "pitch.solution": {
-    en: "Solution",
-    es: "Solución",
-  },
-  "pitch.solution.placeholder": {
-    en: "How does your solution work?",
-    es: "¿Cómo funciona tu solución?",
-  },
-  "pitch.uniqueness": {
-    en: "Uniqueness",
-    es: "Singularidad",
-  },
-  "pitch.uniqueness.placeholder": {
-    en: "What makes your solution unique?",
-    es: "¿Qué hace única a tu solución?",
-  },
-  "pitch.market": {
-    en: "Target Market",
-    es: "Mercado Objetivo",
-  },
-  "pitch.market.placeholder": {
-    en: "Who is your target audience?",
-    es: "¿Quién es tu público objetivo?",
-  },
-  "pitch.traction": {
-    en: "Traction",
-    es: "Tracción",
-  },
-  "pitch.traction.placeholder": {
-    en: "What traction do you have so far?",
-    es: "¿Qué tracción tienes hasta ahora?",
-  },
-  "pitch.business": {
-    en: "Business Model",
-    es: "Modelo de Negocio",
-  },
-  "pitch.business.placeholder": {
-    en: "How will you make money?",
-    es: "¿Cómo generarás ingresos?",
-  },
-  "pitch.team": {
-    en: "Team",
-    es: "Equipo",
-  },
-  "pitch.team.placeholder": {
-    en: "Who is on your team?",
-    es: "¿Quién forma parte de tu equipo?",
-  },
-  "pitch.ask": {
-    en: "The Ask",
-    es: "La Petición",
-  },
-  "pitch.ask.placeholder": {
-    en: "What are you asking for?",
-    es: "¿Qué estás pidiendo?",
-  },
-  "pitch.generate": {
-    en: "Generate Pitch",
-    es: "Generar Pitch",
-  },
-  "pitch.generating": {
-    en: "Generating...",
-    es: "Generando...",
-  },
-  "pitch.canvas": {
-    en: "Pitch Canvas",
-    es: "Canvas de Pitch",
-  },
-  "pitch.result": {
-    en: "Generated Pitch",
-    es: "Pitch Generado",
-  },
-  "pitch.canvas.title": {
-    en: "David Beckett's Pitch Canvas",
-    es: "Canvas de Pitch de David Beckett",
-  },
-  "pitch.canvas.description": {
-    en: "Fill in the details below to generate your 3-minute pitch",
-    es: "Completa los detalles a continuación para generar tu pitch de 3 minutos",
-  },
-  "pitch.result.title": {
-    en: "Your Generated Pitch",
-    es: "Tu Pitch Generado",
-  },
-  "pitch.result.description": {
-    en: "Here's your AI-generated 3-minute pitch based on David Beckett's method",
-    es: "Aquí está tu pitch de 3 minutos generado por IA basado en el método de David Beckett",
-  },
-  "pitch.edit": {
-    en: "Edit Canvas",
-    es: "Editar Canvas",
-  },
-  "pitch.copy": {
-    en: "Copy Text",
-    es: "Copiar Texto",
-  },
-  "pitch.print": {
-    en: "Print",
-    es: "Imprimir",
-  },
-  "pitch.download": {
-    en: "Download",
-    es: "Descargar",
-  },
-  "pitch.copied": {
-    en: "Copied to clipboard",
-    es: "Copiado al portapapeles",
-  },
-  "pitch.copied.description": {
-    en: "Your pitch has been copied to the clipboard",
-    es: "Tu pitch ha sido copiado al portapapeles",
-  },
-  "pitch.your3min": {
-    en: "Your 3-Minute Pitch",
-    es: "Tu Pitch de 3 Minutos",
-  },
-  "pitch.based": {
-    en: "Based on David Beckett's Pitch Canvas",
-    es: "Basado en el Canvas de Pitch de David Beckett",
-  },
+  "pitch.title": "Generador de Pitch Canvas",
+  "pitch.subtitle": "Crea tu pitch perfecto con IA",
+  "pitch.problem": "Problema",
+  "pitch.problem.placeholder": "¿Qué problema estás resolviendo?",
+  "pitch.solution": "Solución",
+  "pitch.solution.placeholder": "¿Cómo funciona tu solución?",
+  "pitch.uniqueness": "Singularidad",
+  "pitch.uniqueness.placeholder": "¿Qué hace única a tu solución?",
+  "pitch.market": "Mercado Objetivo",
+  "pitch.market.placeholder": "¿Quién es tu público objetivo?",
+  "pitch.traction": "Tracción",
+  "pitch.traction.placeholder": "¿Qué tracción tienes hasta ahora?",
+  "pitch.business": "Modelo de Negocio",
+  "pitch.business.placeholder": "¿Cómo generarás ingresos?",
+  "pitch.team": "Equipo",
+  "pitch.team.placeholder": "¿Quién forma parte de tu equipo?",
+  "pitch.ask": "La Petición",
+  "pitch.ask.placeholder": "¿Qué estás pidiendo?",
+  "pitch.generate": "Generar Pitch",
+  "pitch.generating": "Generando...",
+  "pitch.canvas": "Canvas de Pitch",
+  "pitch.result": "Pitch Generado",
+  "pitch.canvas.title": "Canvas de Pitch de David Beckett",
+  "pitch.canvas.description": "Completa los detalles a continuación para generar tu pitch de 3 minutos",
+  "pitch.result.title": "Tu Pitch Generado",
+  "pitch.result.description": "Aquí está tu pitch de 3 minutos generado por IA basado en el método de David Beckett",
+  "pitch.edit": "Editar Canvas",
+  "pitch.copy": "Copiar Texto",
+  "pitch.print": "Imprimir",
+  "pitch.download": "Descargar",
+  "pitch.copied": "Copiado al portapapeles",
+  "pitch.copied.description": "Tu pitch ha sido copiado al portapapeles",
+  "pitch.your3min": "Tu Pitch de 3 Minutos",
+  "pitch.based": "Basado en el Canvas de Pitch de David Beckett",
   // Contact
-  "contact.title": {
-    en: "Contact Pitch Coach",
-    es: "Contactar Coach de Pitch",
-  },
-  "contact.subtitle": {
-    en: "Get professional coaching from Martina Guzman",
-    es: "Obtén coaching profesional de Martina Guzman",
-  },
-  "contact.name": {
-    en: "Name",
-    es: "Nombre",
-  },
-  "contact.email": {
-    en: "Email",
-    es: "Correo Electrónico",
-  },
-  "contact.message": {
-    en: "Message",
-    es: "Mensaje",
-  },
-  "contact.submit": {
-    en: "Submit",
-    es: "Enviar",
-  },
-  "contact.sending": {
-    en: "Sending...",
-    es: "Enviando...",
-  },
-  "contact.success": {
-    en: "Message sent successfully!",
-    es: "¡Mensaje enviado con éxito!",
-  },
-  "contact.success.description": {
-    en: "Martina Guzman will contact you soon.",
-    es: "Martina Guzman te contactará pronto.",
-  },
-  "contact.coach.title": {
-    en: "Meet Your Coach",
-    es: "Conoce a Tu Coach",
-  },
-  "contact.coach.description": {
-    en: "Professional pitch coaching from an industry expert",
-    es: "Coaching profesional de pitch de una experta en la industria",
-  },
-  "contact.coach.bio": {
-    en: "Professional Pitch Coach with over 10 years of experience helping entrepreneurs and executives deliver compelling presentations. Specialized in the David Beckett pitch canvas methodology.",
-    es: "Coach Profesional de Pitch con más de 10 años de experiencia ayudando a emprendedores y ejecutivos a realizar presentaciones convincentes. Especializada en la metodología de canvas de pitch de David Beckett.",
-  },
-  "contact.form.title": {
-    en: "Contact Martina Guzman",
-    es: "Contactar a Martina Guzman",
-  },
-  "contact.form.description": {
-    en: "Get professional coaching to perfect your pitch delivery and presentation",
-    es: "Obtén coaching profesional para perfeccionar la entrega y presentación de tu pitch",
-  },
-  "contact.services": {
-    en: "Coaching Services",
-    es: "Servicios de Coaching",
-  },
-  "contact.basic.title": {
-    en: "Basic Coaching",
-    es: "Coaching Básico",
-  },
-  "contact.basic.description": {
-    en: "One-on-one pitch review session",
-    es: "Sesión individual de revisión de pitch",
-  },
-  "contact.basic.feature1": {
-    en: "60-minute virtual session",
-    es: "Sesión virtual de 60 minutos",
-  },
-  "contact.basic.feature2": {
-    en: "Detailed feedback on your pitch",
-    es: "Retroalimentación detallada sobre tu pitch",
-  },
-  "contact.basic.feature3": {
-    en: "Delivery tips and techniques",
-    es: "Consejos y técnicas de presentación",
-  },
-  "contact.premium.title": {
-    en: "Premium Coaching",
-    es: "Coaching Premium",
-  },
-  "contact.premium.description": {
-    en: "Comprehensive pitch preparation",
-    es: "Preparación integral del pitch",
-  },
-  "contact.premium.feature1": {
-    en: "3 coaching sessions (90 minutes each)",
-    es: "3 sesiones de coaching (90 minutos cada una)",
-  },
-  "contact.premium.feature2": {
-    en: "Pitch content refinement",
-    es: "Refinamiento del contenido del pitch",
-  },
-  "contact.premium.feature3": {
-    en: "Body language and voice coaching",
-    es: "Coaching de lenguaje corporal y voz",
-  },
-  "contact.premium.feature4": {
-    en: "Video recording and analysis",
-    es: "Grabación y análisis de video",
-  },
+  "contact.title": "Contactar Coach de Pitch",
+  "contact.subtitle": "Obtén coaching profesional de Martina Guzman",
+  "contact.name": "Nombre",
+  "contact.email": "Correo Electrónico",
+  "contact.message": "Mensaje",
+  "contact.submit": "Enviar",
+  "contact.sending": "Enviando...",
+  "contact.success": "¡Mensaje enviado con éxito!",
+  "contact.success.description": "Martina Guzman te contactará pronto.",
+  "contact.coach.title": "Conoce a Tu Coach",
+  "contact.coach.description": "Coaching profesional de pitch de una experta en la industria",
+  "contact.coach.bio":
+    "Coach Profesional de Pitch con más de 10 años de experiencia ayudando a emprendedores y ejecutivos a realizar presentaciones convincentes. Especializada en la metodología de canvas de pitch de David Beckett.",
+  "contact.form.title": "Contactar a Martina Guzman",
+  "contact.form.description": "Obtén coaching profesional para perfeccionar la entrega y presentación de tu pitch",
+  "contact.services": "Servicios de Coaching",
+  "contact.basic.title": "Coaching Básico",
+  "contact.basic.description": "Sesión individual de revisión de pitch",
+  "contact.basic.feature1": "Sesión virtual de 60 minutos",
+  "contact.basic.feature2": "Retroalimentación detallada sobre tu pitch",
+  "contact.basic.feature3": "Consejos y técnicas de presentación",
+  "contact.premium.title": "Coaching Premium",
+  "contact.premium.description": "Preparación integral del pitch",
+  "contact.premium.feature1": "3 sesiones de coaching (90 minutos cada una)",
+  "contact.premium.feature2": "Refinamiento del contenido del pitch",
+  "contact.premium.feature3": "Coaching de lenguaje corporal y voz",
+  "contact.premium.feature4": "Grabación y análisis de video",
   // Video Course
-  "course.title": {
-    en: "Video Course",
-    es: "Curso en Video",
-  },
-  "course.name": {
-    en: "The Complete Pitch Mastery Course",
-    es: "El Curso Completo de Dominio del Pitch",
-  },
-  "course.description": {
-    en: "Learn the art of pitching directly from Martina Guzman with this comprehensive video course. Master every aspect of creating and delivering compelling pitches that win over investors, clients, and stakeholders.",
-    es: "Aprende el arte del pitch directamente de Martina Guzman con este curso completo en video. Domina todos los aspectos de la creación y presentación de pitches convincentes que conquisten a inversores, clientes y partes interesadas.",
-  },
-  "course.feature1": {
-    en: "10+ hours of professional video content",
-    es: "Más de 10 horas de contenido profesional en video",
-  },
-  "course.feature2": {
-    en: "Downloadable resources and templates",
-    es: "Recursos y plantillas descargables",
-  },
-  "course.feature3": {
-    en: "Lifetime access and updates",
-    es: "Acceso de por vida y actualizaciones",
-  },
-  "course.feature4": {
-    en: "Private community access",
-    es: "Acceso a comunidad privada",
-  },
-  "course.reviews": {
-    en: "4.9/5 (120+ reviews)",
-    es: "4.9/5 (más de 120 reseñas)",
-  },
-  "course.purchase": {
-    en: "Purchase Course",
-    es: "Comprar Curso",
-  },
-  "course.preview": {
-    en: "Preview: Mastering Your Pitch Delivery",
-    es: "Vista previa: Dominando la Presentación de tu Pitch",
-  },
+  "course.title": "Curso en Video",
+  "course.name": "El Curso Completo de Dominio del Pitch",
+  "course.description":
+    "Aprende el arte del pitch directamente de Martina Guzman con este curso completo en video. Domina todos los aspectos de la creación y presentación de pitches convincentes que conquisten a inversores, clientes y partes interesadas.",
+  "course.feature1": "Más de 10 horas de contenido profesional en video",
+  "course.feature2": "Recursos y plantillas descargables",
+  "course.feature3": "Acceso de por vida y actualizaciones",
+  "course.feature4": "Acceso a comunidad privada",
+  "course.reviews": "4.9/5 (más de 120 reseñas)",
+  "course.purchase": "Comprar Curso",
+  "course.preview": "Vista previa: Dominando la Presentación de tu Pitch",
   // Home Page
-  "home.hero.title": {
-    en: "Create Perfect Pitches with AI",
-    es: "Crea Pitches Perfectos con IA",
-  },
-  "home.hero.subtitle": {
-    en: "Generate professional 3-minute pitches based on David Beckett's pitch canvas method. Free pitch generation with optional professional coaching.",
-    es: "Genera pitches profesionales de 3 minutos basados en el método de canvas de pitch de David Beckett. Generación de pitch gratuita con coaching profesional opcional.",
-  },
-  "home.getstarted": {
-    en: "Get Started",
-    es: "Comenzar",
-  },
-  "home.contactcoach": {
-    en: "Contact Coach",
-    es: "Contactar Coach",
-  },
-  "home.feature1.title": {
-    en: "The Best 3 Minutes Pitch Method",
-    es: "El Mejor Método de Pitch de 3 Minutos",
-  },
-  "home.feature1.description": {
-    en: "Based on David Beckett's proven pitch canvas methodology, our AI helps you create compelling pitches that capture attention and drive results.",
-    es: "Basado en la probada metodología de canvas de pitch de David Beckett, nuestra IA te ayuda a crear pitches convincentes que captan la atención y generan resultados.",
-  },
-  "home.feature1.point1": {
-    en: "Define your problem and solution clearly",
-    es: "Define tu problema y solución claramente",
-  },
-  "home.feature1.point2": {
-    en: "Highlight your unique value proposition",
-    es: "Destaca tu propuesta de valor única",
-  },
-  "home.feature1.point3": {
-    en: "Structure your pitch for maximum impact",
-    es: "Estructura tu pitch para máximo impacto",
-  },
-  "home.feature2.title": {
-    en: "Professional Coaching",
-    es: "Coaching Profesional",
-  },
-  "home.feature2.description": {
-    en: "Get personalized coaching from Martina Guzman to perfect your pitch delivery and presentation.",
-    es: "Obtén coaching personalizado de Martina Guzman para perfeccionar la entrega y presentación de tu pitch.",
-  },
-  "home.feature2.point1": {
-    en: "Build confidence in your delivery",
-    es: "Desarrolla confianza en tu presentación",
-  },
-  "home.feature2.point2": {
-    en: "Refine your presentation style",
-    es: "Refina tu estilo de presentación",
-  },
-  "home.feature2.point3": {
-    en: "Get expert feedback on your pitch",
-    es: "Obtén retroalimentación experta sobre tu pitch",
-  },
-  "home.course.title": {
-    en: "Master Pitching with Our Video Course",
-    es: "Domina el Pitching con Nuestro Curso en Video",
-  },
-  "home.course.description": {
-    en: "Learn at your own pace with Martina Guzman's comprehensive video course on pitch mastery. From fundamentals to advanced techniques, this course covers everything you need to deliver compelling pitches that win over any audience.",
-    es: "Aprende a tu propio ritmo con el curso completo en video de Martina Guzman sobre dominio del pitch. Desde fundamentos hasta técnicas avanzadas, este curso cubre todo lo que necesitas para realizar pitches convincentes que conquisten a cualquier audiencia.",
-  },
-  "home.course.learnmore": {
-    en: "Learn More About the Course",
-    es: "Más Información Sobre el Curso",
-  },
-  "home.cta.title": {
-    en: "Ready to Create Your Perfect Pitch?",
-    es: "¿Listo para Crear tu Pitch Perfecto?",
-  },
-  "home.cta.description": {
-    en: "Start using our AI-powered pitch generator today and transform your ideas into compelling presentations.",
-    es: "Comienza a usar nuestro generador de pitch impulsado por IA hoy y transforma tus ideas en presentaciones convincentes.",
-  },
-  "home.cta.button": {
-    en: "Get Started Now",
-    es: "Comenzar Ahora",
-  },
+  "home.hero.title": "Crea Pitches Perfectos con IA",
+  "home.hero.subtitle":
+    "Genera pitches profesionales de 3 minutos basados en el método de canvas de pitch de David Beckett. Generación de pitch gratuita con coaching profesional opcional.",
+  "home.getstarted": "Comenzar",
+  "home.contactcoach": "Contactar Coach",
+  "home.feature1.title": "El Mejor Método de Pitch de 3 Minutos",
+  "home.feature1.description":
+    "Basado en la probada metodología de canvas de pitch de David Beckett, nuestra IA te ayuda a crear pitches convincentes que captan la atención y generan resultados.",
+  "home.feature1.point1": "Define tu problema y solución claramente",
+  "home.feature1.point2": "Destaca tu propuesta de valor única",
+  "home.feature1.point3": "Estructura tu pitch para máximo impacto",
+  "home.feature2.title": "Coaching Profesional",
+  "home.feature2.description":
+    "Obtén coaching personalizado de Martina Guzman para perfeccionar la entrega y presentación de tu pitch.",
+  "home.feature2.point1": "Desarrolla confianza en tu presentación",
+  "home.feature2.point2": "Refina tu estilo de presentación",
+  "home.feature2.point3": "Obtén retroalimentación experta sobre tu pitch",
+  "home.course.title": "Domina el Pitching con Nuestro Curso en Video",
+  "home.course.description":
+    "Aprende a tu propio ritmo con el curso completo en video de Martina Guzman sobre dominio del pitch. Desde fundamentos hasta técnicas avanzadas, este curso cubre todo lo que necesitas para realizar pitches convincentes que conquisten a cualquier audiencia.",
+  "home.course.learnmore": "Más Información Sobre el Curso",
+  "home.cta.title": "¿Listo para Crear tu Pitch Perfecto?",
+  "home.cta.description":
+    "Comienza a usar nuestro generador de pitch impulsado por IA hoy y transforma tus ideas en presentaciones convincentes.",
+  "home.cta.button": "Comenzar Ahora",
   // Footer
-  "footer.copyright": {
-    en: "© 2025 PitchAI. All rights reserved.",
-    es: "© 2025 PitchAI. Todos los derechos reservados.",
-  },
-  "footer.free": {
-    en: "Pitch generation is free",
-    es: "La generación de pitch es gratuita",
-  },
-  "footer.coaching": {
-    en: "Professional coaching is a paid service",
-    es: "El coaching profesional es un servicio de pago",
-  },
+  "footer.copyright": "© 2025 PitchAI. Todos los derechos reservados.",
+  "footer.free": "La generación de pitch es gratuita",
+  "footer.coaching": "El coaching profesional es un servicio de pago",
   // Auth
-  "auth.signin": {
-    en: "Sign In",
-    es: "Iniciar Sesión",
-  },
-  "auth.signup": {
-    en: "Sign Up",
-    es: "Registrarse",
-  },
-  "auth.google": {
-    en: "Continue with Google",
-    es: "Continuar con Google",
-  },
-  "auth.email": {
-    en: "Email",
-    es: "Correo Electrónico",
-  },
-  "auth.password": {
-    en: "Password",
-    es: "Contraseña",
-  },
-  "auth.confirmPassword": {
-    en: "Confirm Password",
-    es: "Confirmar Contraseña",
-  },
-  "auth.noAccount": {
-    en: "Don't have an account?",
-    es: "¿No tienes una cuenta?",
-  },
-  "auth.hasAccount": {
-    en: "Already have an account?",
-    es: "¿Ya tienes una cuenta?",
-  },
-  "auth.or": {
-    en: "Or continue with",
-    es: "O continúa con",
-  },
-  "auth.signin.description": {
-    en: "Sign in to your account to create and manage your pitches",
-    es: "Inicia sesión en tu cuenta para crear y gestionar tus pitches",
-  },
-  "auth.signup.description": {
-    en: "Create an account to start generating professional pitches",
-    es: "Crea una cuenta para empezar a generar pitches profesionales",
-  },
-  "auth.error": {
-    en: "An error occurred. Please try again.",
-    es: "Ocurrió un error. Por favor, inténtalo de nuevo.",
-  },
-  "auth.invalid": {
-    en: "Invalid email or password",
-    es: "Correo electrónico o contraseña inválidos",
-  },
-  "auth.passwordMismatch": {
-    en: "Passwords do not match",
-    es: "Las contraseñas no coinciden",
-  },
-  "auth.registrationFailed": {
-    en: "Registration failed. Please try again.",
-    es: "Registro fallido. Por favor, inténtalo de nuevo.",
-  },
+  "auth.signin": "Iniciar Sesión",
+  "auth.signup": "Registrarse",
+  "auth.google": "Continuar con Google",
+  "auth.email": "Correo Electrónico",
+  "auth.password": "Contraseña",
+  "auth.confirmPassword": "Confirmar Contraseña",
+  "auth.noAccount": "¿No tienes una cuenta?",
+  "auth.hasAccount": "¿Ya tienes una cuenta?",
+  "auth.or": "O continúa con",
+  "auth.signin.description": "Inicia sesión en tu cuenta para crear y gestionar tus pitches",
+  "auth.signup.description": "Crea una cuenta para empezar a generar pitches profesionales",
+  "auth.error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
+  "auth.invalid": "Correo electrónico o contraseña inválidos",
+  "auth.passwordMismatch": "Las contraseñas no coinciden",
+  "auth.registrationFailed": "Registro fallido. Por favor, inténtalo de nuevo.",
 }
 
 interface LanguageContextType {
-  language: Language
-  setLanguage: (lang: Language) => void
   t: (key: string) => string
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Default language is Spanish
-  const [language, setLanguage] = useState<Language>("es")
-
+  // Simplified t function that only returns Spanish translations
   const t = (key: string): string => {
-    return translations[key]?.[language] || key
+    return translations[key] || key
   }
 
-  return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>
+  return <LanguageContext.Provider value={{ t }}>{children}</LanguageContext.Provider>
 }
 
 export function useLanguage() {

@@ -8,8 +8,8 @@ import { AuthProvider } from "@/components/auth-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Pitch Generator",
-  description: "Generate professional pitches with AI",
+  title: "Generador de Pitch",
+  description: "Genera pitches profesionales con IA",
     generator: 'v0.dev'
 }
 

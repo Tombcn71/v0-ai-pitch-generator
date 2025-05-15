@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useLanguage } from "./language-provider"
 import { Button } from "@/components/ui/button"
-import { LanguageToggle } from "./language-toggle"
 import { ThemeToggle } from "./theme-toggle"
 import { LogOut, Menu, Megaphone, Home, LayoutDashboard, Phone, LogIn } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -51,7 +50,6 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-4">
-            <LanguageToggle />
             <ThemeToggle />
             <Link href="/">
               <Button variant="ghost" size="sm">
@@ -93,7 +91,6 @@ export function Navbar() {
           {/* Mobile menu */}
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
-            <LanguageToggle />
             <Sheet
               open={isMenuOpen}
               onOpenChange={(open) => {
