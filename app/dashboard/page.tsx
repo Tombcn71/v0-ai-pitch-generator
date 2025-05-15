@@ -27,7 +27,7 @@ interface PitchFormData {
 }
 
 export default function Dashboard() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [activeTab, setActiveTab] = useState("form")
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedPitch, setGeneratedPitch] = useState("")
@@ -59,8 +59,8 @@ export default function Dashboard() {
     setError(null)
 
     try {
-      // Use Gemini AI to generate the pitch
-      const pitch = await generatePitch(formData)
+      // Pass the current language to the generatePitch function
+      const pitch = await generatePitch(formData, language)
       setGeneratedPitch(pitch)
       setActiveTab("result")
     } catch (error) {
