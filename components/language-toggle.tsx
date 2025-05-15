@@ -29,17 +29,6 @@ export function LanguageToggle() {
       >
         EN
       </Button>
-      <div className="h-5 w-px bg-border"></div>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => setLanguage("nl")}
-        className={`px-2 py-1 h-8 rounded-none ${
-          language === "nl" ? "bg-primary text-primary-foreground" : "hover:bg-transparent hover:text-foreground"
-        }`}
-      >
-        NL
-      </Button>
     </div>
   )
 }

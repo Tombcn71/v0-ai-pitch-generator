@@ -88,41 +88,9 @@ ${data.ask}
 Formatea el pitch como un guión bien estructurado que pueda ser presentado en exactamente 3 minutos. Incluye secciones claras, transiciones, y una apertura y cierre convincentes. El pitch debe ser persuasivo, conciso y seguir las mejores prácticas para la presentación de pitches.
 `
 
-  const promptNL = `
-Maak een professionele 3-minuten pitch gebaseerd op de pitch canvas methode van David Beckett met behulp van de volgende informatie:
-
-PROBLEEM:
-${data.problem}
-
-OPLOSSING:
-${data.solution}
-
-UNIEKHEID:
-${data.uniqueness}
-
-DOELMARKT:
-${data.market}
-
-TRACTIE:
-${data.traction}
-
-BUSINESSMODEL:
-${data.business}
-
-TEAM:
-${data.team}
-
-DE VRAAG:
-${data.ask}
-
-Formatteer de pitch als een goed gestructureerd script dat in precies 3 minuten kan worden gepresenteerd. Voeg duidelijke secties, overgangen en een overtuigende opening en afsluiting toe. De pitch moet overtuigend en beknopt zijn en de beste praktijken voor pitch delivery volgen.
-`
-
   let prompt
   if (language === "es") {
     prompt = promptES
-  } else if (language === "nl") {
-    prompt = promptNL
   } else {
     prompt = promptEN
   }
@@ -132,14 +100,10 @@ Formatteer de pitch als een goed gestructureerd script dat in precies 3 minuten 
     "You are an expert pitch writer who specializes in creating compelling 3-minute pitches based on David Beckett's pitch canvas methodology. Your pitches are clear, concise, and persuasive."
   const systemMessageES =
     "Eres un experto escritor de pitches que se especializa en crear pitches convincentes de 3 minutos basados en la metodología de canvas de pitch de David Beckett. Tus pitches son claros, concisos y persuasivos."
-  const systemMessageNL =
-    "Je bent een expert pitch schrijver die gespecialiseerd is in het maken van overtuigende 3-minuten pitches gebaseerd op de pitch canvas methodologie van David Beckett. Je pitches zijn duidelijk, beknopt en overtuigend."
 
   let systemMessage
   if (language === "es") {
     systemMessage = systemMessageES
-  } else if (language === "nl") {
-    systemMessage = systemMessageNL
   } else {
     systemMessage = systemMessageEN
   }

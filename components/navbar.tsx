@@ -5,17 +5,19 @@ import { useLanguage } from "./language-provider"
 import { Button } from "@/components/ui/button"
 import { LanguageToggle } from "./language-toggle"
 import { ThemeToggle } from "./theme-toggle"
-import { LogOut, Menu, Megaphone, Home, LayoutDashboard, Phone } from "lucide-react"
+import { LogOut, Menu, Megaphone, Home, LayoutDashboard, Phone, LogIn } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 
 export function Navbar() {
   const { t } = useLanguage()
   const router = useRouter()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { data: session, status } = useSession()
+  const isAuthenticated = status === "authenticated"
 
   useEffect(() => {
     // Cleanup function to restore scrolling when component unmounts
@@ -66,16 +68,26 @@ export function Navbar() {
                 {t("nav.contact")}
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-destructive hover:text-destructive"
-              onClick={handleLogout}
-              disabled={isLoggingOut}
-            >
-              <LogOut className="h-4 w-4 mr-1" />
-              {isLoggingOut ? t("nav.loggingOut") : t("nav.logout")}
-            </Button>
+
+            {isAuthenticated ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-destructive hover:text-destructive"
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+              >
+                <LogOut className="h-4 w-4 mr-1" />
+                {isLoggingOut ? t("nav.loggingOut") : t("nav.logout")}
+              </Button>
+            ) : (
+              <Link href="/signin">
+                <Button variant="ghost" size="sm">
+                  <LogIn className="h-4 w-4 mr-1" />
+                  {t("auth.signin")}
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu */}
@@ -138,15 +150,30 @@ export function Navbar() {
                     <Phone className="h-4 w-4 mr-2" />
                     {t("nav.contact")}
                   </Button>
-                  <Button
-                    variant="ghost"
-                    className="justify-start text-destructive hover:text-destructive"
-                    onClick={handleLogout}
-                    disabled={isLoggingOut}
-                  >
-                    <LogOut className="h-4 w-4 mr-2" />
-                    {isLoggingOut ? t("nav.loggingOut") : t("nav.logout")}
-                  </Button>
+
+                  {isAuthenticated ? (
+                    <Button
+                      variant="ghost"
+                      className="justify-start text-destructive hover:text-destructive"
+                      onClick={handleLogout}
+                      disabled={isLoggingOut}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      {isLoggingOut ? t("nav.loggingOut") : t("nav.logout")}
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      className="justify-start"
+                      onClick={() => {
+                        router.push("/signin")
+                        setIsMenuOpen(false)
+                      }}
+                    >
+                      <LogIn className="h-4 w-4 mr-2" />
+                      {t("auth.signin")}
+                    </Button>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
