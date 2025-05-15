@@ -8,8 +8,8 @@ import { AuthProvider } from "@/components/auth-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Generador de Pitch",
-  description: "Genera presentaciones profesionales con IA",
+  title: "Pitch Generator",
+  description: "Genereer professionele pitches met AI",
     generator: 'v0.dev'
 }
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="nl" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AuthProvider>
