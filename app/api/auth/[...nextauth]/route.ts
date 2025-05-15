@@ -48,6 +48,8 @@ const handler = NextAuth({
       return session
     },
   },
+  // Add debug mode temporarily to get more detailed logs
+  debug: process.env.NODE_ENV === "development",
 })
 
 export { handler as GET, handler as POST }
