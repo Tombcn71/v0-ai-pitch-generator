@@ -22,7 +22,7 @@ export default function Home() {
                   Create Perfect Pitches with AI
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Generate professional 3-minute pitches based on David Beckett's pitch canvas method. Free pitch
+                  Generate professional 3-minute pitches based on David Beckett's best 3 minutes method. Free pitch
                   generation with optional professional coaching.
                 </p>
               </div>
