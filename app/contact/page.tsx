@@ -10,10 +10,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
+import { CheckCircle, AlertCircle } from "lucide-react"
 
 export default function Contact() {
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle")
 
   const [formData, setFormData] = useState({
     name: "",
@@ -28,24 +30,71 @@ export default function Contact() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault()
     setIsSubmitting(true)
+    setFormStatus("idle")
 
-    setTimeout(() => {
+    try {
+      // Create FormData object
+      const formDataObj = new FormData()
+      formDataObj.append("name", formData.name)
+      formDataObj.append("email", formData.email)
+      formDataObj.append("message", formData.message)
+
+      // Web3Forms access key
+      formDataObj.append("access_key", "8130ee22-12e5-4e0a-ae29-bf08a8bddc00")
+
+      // Convert to JSON
+      const object = Object.fromEntries(formDataObj)
+      const json = JSON.stringify(object)
+
+      // Submit to Web3Forms API
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        console.log("Form submitted successfully:", result)
+        setFormStatus("success")
+        toast({
+          title: "Message sent successfully!",
+          description: "Martina Guzman will contact you soon.",
+        })
+
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        })
+      } else {
+        console.error("Form submission failed:", result)
+        setFormStatus("error")
+        toast({
+          title: "Failed to send message",
+          description: "Please try again or contact us directly.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      setFormStatus("error")
       toast({
-        title: "Message sent successfully!",
-        description: "Martina Guzman will contact you soon.",
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
       })
-
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-      })
-
+    } finally {
       setIsSubmitting(false)
-    }, 1500)
+    }
   }
 
   return (
@@ -128,10 +177,33 @@ export default function Contact() {
             </CardHeader>
             <form onSubmit={handleSubmit}>
               <CardContent className="space-y-6">
+                {formStatus === "success" && (
+                  <div className="bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-300 p-4 rounded-md flex items-start">
+                    <CheckCircle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">Message sent successfully!</p>
+                      <p className="text-sm text-green-600 dark:text-green-400">
+                        Martina Guzman will contact you soon.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {formStatus === "error" && (
+                  <div className="bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300 p-4 rounded-md flex items-start">
+                    <AlertCircle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">Failed to send message</p>
+                      <p className="text-sm text-red-600 dark:text-red-400">Please try again or contact us directly.</p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
                   <Input
                     id="name"
+                    name="name"
                     placeholder="Your name"
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
@@ -143,6 +215,7 @@ export default function Contact() {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="your.email@example.com"
                     value={formData.email}
@@ -155,6 +228,7 @@ export default function Contact() {
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
+                    name="message"
                     placeholder="Tell us about your coaching needs..."
                     value={formData.message}
                     onChange={(e) => handleInputChange("message", e.target.value)}
