@@ -342,8 +342,9 @@ export default function Contact() {
                 <div className="p-6 sm:w-2/3">
                   <CardTitle className="mb-2">The Complete Pitch Mastery Course</CardTitle>
                   <CardDescription className="mb-4 text-base">
-                    Learn at your own pace with comprehensive video lessons covering all aspects of pitch creation and
-                    delivery.
+                    Learn the art of pitching directly from Martina Guzman with this comprehensive video course. Master
+                    all aspects of creating and delivering compelling pitches that win over investors, clients, and
+                    stakeholders.
                   </CardDescription>
                   <div className="space-y-4">
                     <div className="flex items-center">
@@ -422,7 +423,7 @@ export default function Contact() {
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                       </svg>
-                      <span>Community access and support</span>
+                      <span>Access to private community</span>
                     </div>
                   </div>
                   <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
