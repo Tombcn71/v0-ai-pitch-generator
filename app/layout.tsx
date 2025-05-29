@@ -4,13 +4,14 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import { AuthProvider } from "@/components/auth-provider"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Generador de Pitch",
-  description: "Genera pitches profesionales con IA",
-    generator: 'v0.dev'
+  title: "Pitch Generator",
+  description: "Generate professional pitches with AI",
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -19,11 +20,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <LanguageProvider>{children}</LanguageProvider>
+            <LanguageProvider>
+              {children}
+              <Toaster />
+            </LanguageProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
