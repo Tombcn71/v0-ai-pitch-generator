@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { generatePitch } from "@/lib/generate-pitch"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle, Download, Printer, Copy, FileText } from "lucide-react"
+import { AlertCircle, Download, Printer, Copy, Megaphone } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 interface PitchFormData {
@@ -87,7 +87,7 @@ export default function Dashboard() {
       const element = document.createElement("a")
       const file = new Blob([generatedPitch], { type: "text/plain" })
       element.href = URL.createObjectURL(file)
-      element.download = "pitch-canvas.txt"
+      element.download = "ai-pitch-canvas.txt"
       document.body.appendChild(element)
       element.click()
       document.body.removeChild(element)
@@ -144,8 +144,8 @@ export default function Dashboard() {
       <div className="space-y-1 pitch-content p-8 bg-card border rounded-md shadow-sm">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
-            <FileText className="h-6 w-6 text-primary mr-2" />
-            <h2 className="text-2xl font-bold">Your 3-Minute Pitch</h2>
+            <Megaphone className="h-6 w-6 text-primary mr-2" />
+            <h2 className="text-2xl font-bold">Your AI-Generated 3-Minute Pitch</h2>
           </div>
           <div className="text-sm text-muted-foreground">Based on David Beckett's Pitch Canvas</div>
         </div>
@@ -158,8 +158,13 @@ export default function Dashboard() {
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <main className="flex-1 container py-8">
-        <h1 className="text-3xl font-bold mb-6">Pitch Canvas Generator</h1>
-        <p className="text-muted-foreground mb-8">Create your perfect pitch with AI</p>
+        <div className="flex items-center mb-6">
+          <Megaphone className="h-8 w-8 text-primary mr-3" />
+          <div>
+            <h1 className="text-3xl font-bold">AI Pitch Canvas Generator</h1>
+            <p className="text-muted-foreground">Create your perfect pitch with AI technology</p>
+          </div>
+        </div>
 
         {error && (
           <Alert variant="destructive" className="mb-6">
@@ -173,15 +178,18 @@ export default function Dashboard() {
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="form">Pitch Canvas</TabsTrigger>
             <TabsTrigger value="result" disabled={!generatedPitch}>
-              Generated Pitch
+              AI Generated Pitch
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="form">
             <Card>
               <CardHeader>
-                <CardTitle>David Beckett's Pitch Canvas</CardTitle>
-                <CardDescription>Fill in the details below to generate your 3-minute pitch</CardDescription>
+                <CardTitle className="flex items-center">
+                  <Megaphone className="h-5 w-5 mr-2" />
+                  David Beckett's Pitch Canvas
+                </CardTitle>
+                <CardDescription>Fill in the details below to generate your AI-powered 3-minute pitch</CardDescription>
               </CardHeader>
               <form onSubmit={handleSubmit}>
                 <CardContent className="space-y-6">
@@ -276,8 +284,9 @@ export default function Dashboard() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button type="submit" disabled={isGenerating}>
-                    {isGenerating ? "Generating..." : "Generate Pitch"}
+                  <Button type="submit" disabled={isGenerating} className="flex items-center">
+                    <Megaphone className="h-4 w-4 mr-2" />
+                    {isGenerating ? "AI is generating..." : "Generate AI Pitch"}
                   </Button>
                 </CardFooter>
               </form>
@@ -287,7 +296,10 @@ export default function Dashboard() {
           <TabsContent value="result">
             <Card>
               <CardHeader>
-                <CardTitle>Your Generated Pitch</CardTitle>
+                <CardTitle className="flex items-center">
+                  <Megaphone className="h-5 w-5 mr-2" />
+                  Your AI-Generated Pitch
+                </CardTitle>
                 <CardDescription>
                   Here's your AI-generated 3-minute pitch based on David Beckett's method
                 </CardDescription>

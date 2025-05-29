@@ -210,8 +210,6 @@ export default function Home() {
           </div>
         </section>
 
-        
-
         {/* Call to Action */}
         <section className="py-12 relative overflow-hidden bg-background">
           <div className="container relative z-10 px-4 md:px-6">
@@ -233,7 +231,7 @@ export default function Home() {
       <footer className="border-t py-6 md:py-0 bg-background">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2025 PitchAI. All rights reserved.
+            © 2025 AI Pitch Generator. All rights reserved.
           </p>
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-2">
             <p className="text-center text-sm leading-loose text-muted-foreground">

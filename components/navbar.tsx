@@ -38,9 +38,9 @@ export function Navbar() {
   return (
     <nav className="border-b bg-background sticky top-0 z-10">
       <div className="container flex h-16 items-center justify-between px-4">
-        <Link href="/" className="text-xl font-bold flex items-center">
-          <Megaphone className="h-5 w-5 mr-2" />
-          PitchAI
+        <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+          <Megaphone className="h-6 w-6 text-primary" />
+          <span className="text-lg font-bold">AI Pitch Generator</span>
         </Link>
 
         <div className="flex items-center gap-4">
@@ -105,7 +105,10 @@ export function Navbar() {
               </SheetTrigger>
               <SheetContent side="right">
                 <SheetHeader>
-                  <SheetTitle>Menu</SheetTitle>
+                  <SheetTitle className="flex items-center space-x-2">
+                    <Megaphone className="h-5 w-5 text-primary" />
+                    <span>Menu</span>
+                  </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-4 mt-6">
                   <Button
