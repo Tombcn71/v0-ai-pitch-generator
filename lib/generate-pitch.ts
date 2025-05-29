@@ -16,9 +16,13 @@ interface PitchFormData {
 
 export async function generatePitch(data: PitchFormData): Promise<string> {
   try {
+    console.log("Starting pitch generation...")
+    console.log("API Key exists:", !!process.env.GOOGLE_API_KEY)
+
     const apiKey = process.env.GOOGLE_API_KEY
 
     if (!apiKey) {
+      console.error("Google API key is missing")
       throw new Error("Google API key is not configured. Please add GOOGLE_API_KEY to your environment variables.")
     }
 
@@ -63,12 +67,14 @@ Format the pitch as a well-structured script that can be presented in exactly 3 
 
     const geminiModel = googleClient("gemini-1.5-pro")
 
+    console.log("Calling Gemini API...")
     const { text } = await generateText({
       model: geminiModel,
       prompt,
       system: systemMessage,
     })
 
+    console.log("Pitch generated successfully")
     return text
   } catch (error) {
     console.error("Error generating pitch:", error)

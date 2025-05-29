@@ -51,11 +51,16 @@ export function Navbar() {
                 Home
               </Button>
             </Link>
-            <Link href="/dashboard">
-              <Button variant="ghost" size="sm">
-                Dashboard
-              </Button>
-            </Link>
+
+            {/* Only show Dashboard when authenticated */}
+            {isAuthenticated && (
+              <Link href="/dashboard">
+                <Button variant="ghost" size="sm">
+                  Dashboard
+                </Button>
+              </Link>
+            )}
+
             <Link href="/contact">
               <Button variant="ghost" size="sm">
                 Contact Coach
@@ -122,17 +127,22 @@ export function Navbar() {
                     <Home className="h-4 w-4 mr-2" />
                     Home
                   </Button>
-                  <Button
-                    variant="ghost"
-                    className="justify-start"
-                    onClick={() => {
-                      router.push("/dashboard")
-                      setIsMenuOpen(false)
-                    }}
-                  >
-                    <LayoutDashboard className="h-4 w-4 mr-2" />
-                    Dashboard
-                  </Button>
+
+                  {/* Only show Dashboard when authenticated */}
+                  {isAuthenticated && (
+                    <Button
+                      variant="ghost"
+                      className="justify-start"
+                      onClick={() => {
+                        router.push("/dashboard")
+                        setIsMenuOpen(false)
+                      }}
+                    >
+                      <LayoutDashboard className="h-4 w-4 mr-2" />
+                      Dashboard
+                    </Button>
+                  )}
+
                   <Button
                     variant="ghost"
                     className="justify-start"

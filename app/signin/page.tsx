@@ -2,19 +2,20 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { FaGoogle } from "react-icons/fa"
 import { Separator } from "@/components/ui/separator"
 
 export default function SignIn() {
   const router = useRouter()
+  const { data: session, status } = useSession()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
 
@@ -22,6 +23,13 @@ export default function SignIn() {
     email: "",
     password: "",
   })
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/dashboard")
+    }
+  }, [status, router])
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -48,14 +56,32 @@ export default function SignIn() {
 
       if (result?.error) {
         setError("Invalid email or password")
-      } else {
-        router.push("/dashboard")
+      } else if (result?.ok) {
+        // Force a page refresh to ensure session is properly loaded
+        window.location.href = "/dashboard"
       }
     } catch (error) {
       setError("An error occurred. Please try again.")
     } finally {
       setIsLoading(false)
     }
+  }
+
+  // Show loading while checking authentication status
+  if (status === "loading") {
+    return (
+      <div className="flex min-h-screen flex-col">
+        <Navbar />
+        <main className="flex-1 flex items-center justify-center">
+          <div>Loading...</div>
+        </main>
+      </div>
+    )
+  }
+
+  // Don't render signin form if already authenticated
+  if (status === "authenticated") {
+    return null
   }
 
   return (
