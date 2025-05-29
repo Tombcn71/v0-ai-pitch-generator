@@ -233,11 +233,17 @@ export default function Home() {
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
             © 2025 AI Pitch Generator. All rights reserved.
           </p>
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-2">
-            <p className="text-center text-sm leading-loose text-muted-foreground">
-              Pitch generation is free • Professional coaching is a paid service
-            </p>
-          </div>
+          <p className="text-center text-sm leading-loose text-muted-foreground">
+            Powered by{" "}
+            <a
+              href="https://mooiwebdesign.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              mooiwebdesign.com
+            </a>
+          </p>
         </div>
       </footer>
     </div>
