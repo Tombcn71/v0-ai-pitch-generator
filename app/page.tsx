@@ -69,7 +69,7 @@ export default function Home() {
                     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                   </svg>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">The Best 3-Minute Pitch Method</h2>
+                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">The Best 3-Minutes Pitch Method</h2>
                 <p className="text-muted-foreground md:text-xl">
                   Based on David Beckett's proven pitch canvas methodology, our AI helps you create compelling pitches
                   that capture attention and drive results.
