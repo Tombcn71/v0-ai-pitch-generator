@@ -39,7 +39,7 @@ export function Navbar() {
     <nav className="border-b bg-background sticky top-0 z-10">
       <div className="container flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-          <Megaphone className="h-6 w-6 text-primary" />
+          <Megaphone className="h-8 w-8 text-primary" />
           <span className="text-lg font-bold">AI Pitch Generator</span>
         </Link>
 
@@ -111,7 +111,7 @@ export function Navbar() {
               <SheetContent side="right">
                 <SheetHeader>
                   <SheetTitle className="flex items-center space-x-2">
-                    <Megaphone className="h-5 w-5 text-primary" />
+                    <Megaphone className="h-6 w-6 text-primary" />
                     <span>Menu</span>
                   </SheetTitle>
                 </SheetHeader>

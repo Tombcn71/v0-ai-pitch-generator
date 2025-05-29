@@ -144,7 +144,7 @@ export default function Dashboard() {
       <div className="space-y-1 pitch-content p-8 bg-card border rounded-md shadow-sm">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
-            <Megaphone className="h-6 w-6 text-primary mr-2" />
+            <Megaphone className="h-10 w-10 text-primary mr-3" />
             <h2 className="text-2xl font-bold">Your AI-Generated 3-Minute Pitch</h2>
           </div>
           <div className="text-sm text-muted-foreground">Based on David Beckett's Pitch Canvas</div>
@@ -159,7 +159,7 @@ export default function Dashboard() {
       <Navbar />
       <main className="flex-1 container py-8">
         <div className="flex items-center mb-6">
-          <Megaphone className="h-8 w-8 text-primary mr-3" />
+          <Megaphone className="h-12 w-12 text-primary mr-4" />
           <div>
             <h1 className="text-3xl font-bold">AI Pitch Canvas Generator</h1>
             <p className="text-muted-foreground">Create your perfect pitch with AI technology</p>
@@ -186,7 +186,7 @@ export default function Dashboard() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Megaphone className="h-5 w-5 mr-2" />
+                  <Megaphone className="h-7 w-7 mr-3" />
                   David Beckett's Pitch Canvas
                 </CardTitle>
                 <CardDescription>Fill in the details below to generate your AI-powered 3-minute pitch</CardDescription>
@@ -285,7 +285,7 @@ export default function Dashboard() {
                 </CardContent>
                 <CardFooter>
                   <Button type="submit" disabled={isGenerating} className="flex items-center">
-                    <Megaphone className="h-4 w-4 mr-2" />
+                    <Megaphone className="h-5 w-5 mr-2" />
                     {isGenerating ? "AI is generating..." : "Generate AI Pitch"}
                   </Button>
                 </CardFooter>
@@ -297,7 +297,7 @@ export default function Dashboard() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Megaphone className="h-5 w-5 mr-2" />
+                  <Megaphone className="h-7 w-7 mr-3" />
                   Your AI-Generated Pitch
                 </CardTitle>
                 <CardDescription>
