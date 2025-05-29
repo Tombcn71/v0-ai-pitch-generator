@@ -66,7 +66,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-destructive hover:text-destructive"
+                className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-950/20"
                 onClick={handleLogout}
                 disabled={isLoggingOut}
               >
@@ -148,7 +148,7 @@ export function Navbar() {
                   {isAuthenticated ? (
                     <Button
                       variant="ghost"
-                      className="justify-start text-destructive hover:text-destructive"
+                      className="justify-start text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-950/20"
                       onClick={handleLogout}
                       disabled={isLoggingOut}
                     >
